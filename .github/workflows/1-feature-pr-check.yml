@@ -40,9 +40,9 @@ jobs:
             pip install .
           fi
 
-      # - name: Build migration SQL (offline only)
-      #   working-directory: backend
-      #   run: alembic upgrade head --sql > /dev/null
+      - name: Build migration SQL (offline only)
+        working-directory: backend
+        run: alembic upgrade head --sql > /dev/null
 
   create-pr-to-master:
     name: Auto create PR to master

@@ -13,6 +13,9 @@ jobs:
   alembic-upgrade:
     name: Run Alembic on master
     runs-on: ubuntu-latest
+    concurrency:
+      group: alembic-upgrade-${{ github.ref_name }}
+      cancel-in-progress: false
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
@@ -45,8 +48,6 @@ jobs:
           elif [ -f pyproject.toml ]; then
             pip install .
           fi
-
-          pip install alembic sqlalchemy psycopg
 
       - name: Execute migration
         working-directory: backend
