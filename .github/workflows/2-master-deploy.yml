@@ -49,6 +49,10 @@ jobs:
             pip install .
           fi
 
+      - name: Init schema
+        working-directory: backend
+        run: alembic revision --autogenerate -m "init schema"
+
       - name: Execute migration
         working-directory: backend
         run: alembic upgrade head
